@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(cors());
 app.use(upload.array());
 
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.send("Hello World")
 })
 
