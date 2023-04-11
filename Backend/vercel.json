@@ -5,5 +5,11 @@
       "src": "App.js",
       "use": "@now/node"
     }
+  ],
+    "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "App.js"
+    }
   ]
 }
