@@ -12,11 +12,14 @@ const pool = mysql
   })
   .promise()
 
+console.log("Connected to database");
+
 export async function createUser({email, password, displayName}) {
   const [results] = await pool.query(
     `INSERT INTO users (email, password, displayName) VALUES (?, ?, ?)`,
     [email, password, displayName]
   )
+  console.log(results);
   return results
 }
 
@@ -25,6 +28,7 @@ export async function getUserWithEmail(email) {
     `SELECT * FROM users WHERE email = ?`,
     [email]
   )
+  console.log(results);
   return results
 }
 
@@ -33,6 +37,7 @@ export async function updateUserDisplayName(id, displayName) {
     `UPDATE users SET displayName = ? WHERE id = ?`,
     [displayName, id]
   )
+  console.log(results);
   return results
 }
 
@@ -41,5 +46,6 @@ export async function updateUserProfileImage(id, profileImage) {
     `UPDATE users SET profileImage = ? WHERE id = ?`,
     [profileImage, id]
   )
+  console.log(results);
   return results
 }

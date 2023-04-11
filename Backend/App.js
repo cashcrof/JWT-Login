@@ -21,6 +21,7 @@ app.get("/*", (req, res) => {
 })
 
 app.post("/api/login", async (req, res) => {
+  console.log("login", req.body)
   const {email, password: plaintextPassword} = req.body;
   const userArray = await database.getUserWithEmail(email);
   const user = userArray[0];
@@ -38,6 +39,7 @@ app.post("/api/login", async (req, res) => {
 })
 
 app.post("/api/signup", async (req, res) => {
+  console.log("signup", req.body)
   const {email, password: plaintextPassword, displayName} = req.body;
   const hashedPassword = await bcrypt.hash(plaintextPassword, 10)
   const created = await database.createUser({email, password: hashedPassword, displayName})
@@ -50,6 +52,16 @@ app.post("/api/signup", async (req, res) => {
     console.log("sign up failed", req.body);
     res.status(401).send({status: "error", message: "Sign up failed"})
   }
+})
+
+app.put("/api/users/:id/displayName", (req, res) => {
+  console.log("update displayName", req.body)
+  res.send({status: "ok"})
+})
+
+app.put("/api/users/:id/profileImage", (req, res) => {
+  console.log("update profile image", req.body)
+  res.send({status: "ok"})
 })
 
 const PORT = process.env.PORT || 8080;
